@@ -1,1 +1,3 @@
-pip install git+https://github.com/turicas/rows.git@feature/plugin-pdf#egg=rows
+git+https://github.com/turicas/rows.git@feature/plugin-pdf#egg=rows
+pdfminer.six
+cached-property

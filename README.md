@@ -16,3 +16,10 @@ pip install -r requirements.txt
 ```bash
 python extrair.py arquivo.pdf arquivo.csv
 ```
+
+Você pode utilizar o arquivo que vem com esse repositório como exemplo (como
+são 64 páginas, irá demorar em torno de 1min35s):
+
+```bash
+time python extrair.py data/amazonas-2010.pdf data/amazonas-2010.csv
+```

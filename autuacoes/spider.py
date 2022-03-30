@@ -56,6 +56,7 @@ class AutuacoesSpider(scrapy.Spider):
         # If the file was downloaded already, use the downloaded version, but
         # download again and overwrite the file if it's for the current year
         # (could be changed since last download).
+        # TODO: add an option to force re-downloading all the files
         if filename.exists() and start_date.year != today().year:
             url = "file://" + str(filename.absolute())
         else:
@@ -75,9 +76,11 @@ class AutuacoesSpider(scrapy.Spider):
             return
 
         filename = response.meta["row"]["filename"]
-        with filename.open(mode="wb") as fobj:
-            fobj.write(response.body)
+        if not filename.exists():
+            with filename.open(mode="wb") as fobj:
+                fobj.write(response.body)
 
+        # TODO: add option to download-only (do not parse)
         for row in IbamaPdfExtractor(filename, logger=self.logger):
             yield row
 
@@ -98,7 +101,10 @@ if __name__ == "__main__":
     parser.add_argument("output_filename")
     args = parser.parse_args()
 
-    writer = CsvLazyDictWriter(args.output_filename)
+    output_filename = Path(args.output_filename)
+    if not output_filename.parent.exists():
+        output_filename.parent.mkdir(parents=True)
+    writer = CsvLazyDictWriter(output_filename)
     def receive_item(signal, sender, item, response, spider):
         writer.writerow(item)
     dispatcher.connect(receive_item, signal=signals.item_passed)

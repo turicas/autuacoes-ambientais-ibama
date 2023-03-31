@@ -174,9 +174,13 @@ class IbamaPdfExtractor:
             # Check if row was split in correct order by checking if document
             # is present in another field (when it's not filled).
             if not row["cnpj_cpf"]:
-                for value in row.values():
-                    if REGEXP_CNPJ.findall(value) or REGEXP_CPF.findall(value):
-                        raise ValueError(f"Row parsed incorrectly: {row}")
+                documents = REGEXP_CNPJ.findall(row["nome_autuado"]) + REGEXP_CPF.findall(row["nome_autuado"])
+                if documents:
+                    if len(documents) != 1:
+                        self.logger.warning(f"Row parsed incorrectly: {row}")
+                    else:
+                        row["cnpj_cpf"] = documents[0]
+                        row["nome_autuado"] = row["nome_autuado"].replace(row["cnpj_cpf"], "").strip()
 
             yield self.convert(row)
 

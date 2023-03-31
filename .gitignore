@@ -2,6 +2,7 @@
 *.pyc
 *~
 .*.sw?
+.DS_Store
 .coverage
 .directory
 .env
@@ -9,6 +10,6 @@
 .tox
 MANIFEST
 build/*
+data/
 dist/*
 reg_settings.py
-.DS_Store

@@ -16,7 +16,10 @@ Metodologia:
 - Criei um programa que acessa a página https://servicos.ibama.gov.br/ctf/publico/areasembargadas/ConsultaPublicaAreasEmbargadas.php e então:
 - Na parte "Consulta Pública", marca "autuações ambientais"
 - Na parte "Dados da Infração", seleciona um dos estados (o programa pode passar por todos os estados - mas esse caso, só fiz para o PA)
-- Preenche o período de 01/01/ANO até 31/12/ANO, onde "ANO" varia de 1980 a 2021 (o programa roda uma vez para cada ano possível, porque o máximo permitido é 1 ano)- Baixa o PDF resultante da busca- Converte o PDF para CSV- Limpa o arquivo CSV (corrige nomes de municípios, adiciona código IBGE dos municípios etc.)
+- Preenche o período de 01/01/ANO até 31/12/ANO, onde "ANO" varia de 1980 ao ano atual (o programa roda uma vez para cada ano possível, porque o máximo permitido é 1 ano)
+- Baixa o PDF resultante da busca
+- Converte o PDF para CSV
+- Limpa o arquivo CSV (corrige nomes de municípios, adiciona código IBGE dos municípios etc.)
 
 
 ## Instalando

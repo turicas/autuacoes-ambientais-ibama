@@ -7,6 +7,7 @@ from rows.fields import slug
 
 
 CITY_DATA_FILENAME = Path(__file__).parent / "data" / "municipios.csv"
+REGEXP_RS = re.compile("^RIO GRANDE DO SUL (.*)$")
 STATE_NAMES = {
     "acre": "AC",
     "alagoas": "AL",
@@ -106,7 +107,10 @@ def city_map():
 
 @lru_cache(maxsize=5570 * 2)
 def get_city(state, city):
-    if "/" in city:
+    result_rs = REGEXP_RS.findall(city)
+    if result_rs:
+        state, city = 'RS', result_rs[0]
+    elif "/" in city:
         city2, state2 = city.split("/")
         if state and state != state2:
             raise ValueError(f"Conflict in state for: {city}/{state}")

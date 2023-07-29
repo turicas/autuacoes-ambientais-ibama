@@ -1,4 +1,5 @@
 import csv
+import re
 from functools import lru_cache
 
 from pathlib import Path
@@ -107,6 +108,12 @@ def city_map():
 
 @lru_cache(maxsize=5570 * 2)
 def get_city(state, city):
+    # TODO: Fix 'Cannot parse city/state:' for:
+    # 'AUGUSTO SEVERO/RN'
+    # 'DO SUL/MT'
+    # 'EMBU/SP'
+    # 'MUNICIPIO PROVISORIO/DF'
+    # 'SAO LUIZ DO ANUAA/RR'
     result_rs = REGEXP_RS.findall(city)
     if result_rs:
         state, city = 'RS', result_rs[0]

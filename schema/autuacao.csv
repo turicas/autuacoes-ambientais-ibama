@@ -1,13 +1,13 @@
 field_name,field_type
 numero,text
 infracao,text
-data_infracao,text
+data_infracao,date
 unidade_federativa,text
 municipio,text
 cnpj_cpf,text
 autuado,text
 numero_auto,text
-valor_multa,text
+valor_multa,decimal
 numero_processo,text
 status,text
 sancoes_aplicadas,text
